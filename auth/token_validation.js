@@ -6,7 +6,7 @@ module.exports = {
         let token = req.get('authorization');
         if (token) {
             token = token.slice(7);
-            verify(token, 'qwe1234', (err, decoded) => {
+            verify(token, 'mysecret1234', (err, decoded) => {
                 if (err) {
                     res.status(404).send({
                         statusCode: 404,
