@@ -1,6 +1,7 @@
 const { getUserId, getUser, updateUser, creteUser, deleteUser, getUserEmail } = require('../models/user.model');
 const { genSaltSync, hashSync, compareSync } = require('bcrypt');
 const { sign } = require('jsonwebtoken');
+var secret = process.env.SECRET_KEYS;
 
 module.exports = {
     create: (req, res) => {
@@ -105,7 +106,7 @@ module.exports = {
             const data = compareSync(body.password, result.password);
             if (data) {
                 result.password = undefined;
-                const jsontoken = sign({ data: result }, 'mysecret1234', {
+                const jsontoken = sign({ data: result }, secret, {
                     expiresIn: "1d"
                 });
                 return res.status(200).send({

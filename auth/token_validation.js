@@ -1,12 +1,13 @@
 const e = require('express');
 const { verify } = require('jsonwebtoken');
+var secret = process.env.SECRET_KEYS;
 
 module.exports = {
     checkToken: (req, res, netx) => {
         let token = req.get('authorization');
         if (token) {
             token = token.slice(7);
-            verify(token, 'mysecret1234', (err, decoded) => {
+            verify(token, secret, (err, decoded) => {
                 if (err) {
                     res.status(404).send({
                         statusCode: 404,

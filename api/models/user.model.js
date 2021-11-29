@@ -21,7 +21,7 @@ module.exports = {
 
     getUser: function(callBack) {
         pool.query(
-            `SELECT id, firstname, lastname, gender, email, phone FROM register`, [], (err, results, fields) => {
+            `SELECT * FROM register`, [], (err, results, fields) => {
                 if (err) throw err;
                 return callBack(null, results);
             }
